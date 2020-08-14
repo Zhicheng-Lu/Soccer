@@ -15,13 +15,9 @@
 			include("new_competition_tabs/knockout/round.php");
 			include("new_competition_tabs/knockout/games.php");
 			if ($tournament == "champions_league") {
-<<<<<<< HEAD
 				knockout_round($conn, $tournament, $competition, "俱乐部第一轮", "club", "qualifications_first", 48, "qualifications_second", 122, "union_associations", "leveldown_first", 12);
 				knockout_round($conn, $tournament, $competition, "俱乐部第二轮", "club", "qualifications_second", 24, "finals", 148, "union_associations", "finals", 0);
 				knockout_round($conn, $tournament, $competition, "国家队第一轮", "nation", "qualifications_first", 4, "finals", 146, "union_associations", "finals", 131);
-=======
-				knockout_series($conn, $tournament, $competition, "俱乐部第一轮", 0, "club", "qualifications_first", 48, "qualifications_second", "union_associations", "leveldown_first");
->>>>>>> eb33284dd007762dcf9793d8a9c825c21c574c35
 			}
 			else if($tournament == "union_associations") {
 				knockout_round($conn, $tournament, $competition, "冠军杯第一轮", "club", "leveldown_first", 24, "leveldown_second", 159, "union_associations", "qualifications_first", 171);
