@@ -1,3 +1,70 @@
+<?php
+include("includes/connection.php");
+if (isset($_POST["country_name"])) {
+    $country_name = $_POST["country_name"];
+
+    $sql = 'INSERT INTO countries VALUES("'.$country_name.'", "'.$_POST["country_chinese_name"].'", "'.$_POST["country_continent"].'")';
+    $conn->query($sql);
+
+    // country flag
+    $uploaded_country_flag = $_FILES["country_flag"]["tmp_name"];
+    
+    if (!empty($uploaded_country_flag)) {
+        $src = imagecreatefrompng($uploaded_country_flag);
+        list($width,$height)=getimagesize($uploaded_country_flag);
+
+        $new_height = 28;
+        $new_width = ($width/$height)*$new_height;
+        $tmp = imagecreatetruecolor($new_width, $new_height);
+
+        imagealphablending($tmp, false);
+        imagesavealpha($tmp, true);
+        imagecopyresampled($tmp, $src, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+
+        $target_file = 'images/countries_small/'.$country_name.'.png';
+        imagepng($tmp, $target_file, 9);
+        imagedestroy($src);
+        imagedestroy($tmp);
+    }
+    move_uploaded_file($_FILES["country_flag"]["tmp_name"], 'images/countries/'.$country_name.'.png');
+
+    // association flag
+    $uploaded_association_flag = $_FILES["association_flag"]["tmp_name"];
+    $target_file = 'images/football associations/'.$country_name.'.png';
+    move_uploaded_file($_FILES["association_flag"]["tmp_name"], $target_file);
+
+    header('Location: index.php?tab=team');
+}
+if (isset($_POST["team_name"])) {
+    $team_name = $_POST["team_name"];
+
+    $sql = 'INSERT INTO teams VALUES("'.$team_name.'", "'.$_POST["team_chinese_name"].'", "'.$_POST["team_nationality"].'")';
+    $conn->query($sql);
+
+    $uploaded_team_badge = $_FILES["team_badge"]["tmp_name"];
+    
+    if (!empty($uploaded_team_badge)) {
+        $src = imagecreatefrompng($uploaded_team_badge);
+        list($width,$height)=getimagesize($uploaded_team_badge);
+
+        $new_height = 28;
+        $new_width = ($width/$height)*$new_height;
+        $tmp = imagecreatetruecolor($new_width, $new_height);
+
+        imagealphablending($tmp, false);
+        imagesavealpha($tmp, true);
+        imagecopyresampled($tmp, $src, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+
+        $target_file = 'images/teams_small/'.$team_name.'.png';
+        imagepng($tmp, $target_file, 9);
+        imagedestroy($src);
+        imagedestroy($tmp);
+    }
+    move_uploaded_file($_FILES["team_badge"]["tmp_name"], 'images/teams/'.$team_name.'.png');
+
+    header('Location: index.php?tab=team');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
