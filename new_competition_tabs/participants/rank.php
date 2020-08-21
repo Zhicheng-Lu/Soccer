@@ -101,7 +101,7 @@
 	array("rank"=>11, "name"=>"Australia"),
 	array("rank"=>12, "name"=>"Jordan"),
 	array("rank"=>13, "name"=>"Philippines"),
-	array("rank"=>14, "name"=>""),
+	array("rank"=>14, "name"=>"North Korea"),
 	array("rank"=>15, "name"=>"India"),
 	array("rank"=>16, "name"=>"Vietnam"),
 	array("rank"=>17, "name"=>"Tajikistan"),
