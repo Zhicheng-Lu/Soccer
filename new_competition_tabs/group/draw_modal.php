@@ -88,7 +88,7 @@ $auto_draw = $_POST["auto_draw"];
 			for ($j = 0; $j < $i; $j++) {
 				$offset += $number_of_clubs[$j];
 			}
-			$sql = 'SELECT T.team_name, T.team_chinese_name, T.team_nationality, C.country_continent FROM participants AS P LEFT JOIN teams AS T ON P.team_name=T.team_name LEFT JOIN countries AS C ON T.team_nationality=C.country_name WHERE tournament="'.$tournament.'" AND competition='.$competition.' AND type1="club" AND type2="finals" ORDER BY points DESC LIMIT '.$offset.', '.$number_of_clubs[$i];
+			$sql = 'SELECT T.team_name, T.team_chinese_name, T.team_nationality, C.country_continent FROM participants AS P LEFT JOIN teams AS T ON P.team_name=T.team_name LEFT JOIN countries AS C ON T.team_nationality=C.country_name WHERE tournament="'.$tournament.'" AND competition='.$competition.' AND type1="club" AND type2="finals" ORDER BY points DESC, T.team_name ASC LIMIT '.$offset.', '.$number_of_clubs[$i];
 			$result = $conn->query($sql);
 			while ($row = $result->fetch_assoc()) {
 				array_push($teams[$i], array("team_name"=>$row["team_name"], "team_chinese_name"=>$row["team_chinese_name"], "nationality"=>$row["team_nationality"], "continent"=>$row["country_continent"], "availability"=>"unavailable"));
@@ -98,7 +98,7 @@ $auto_draw = $_POST["auto_draw"];
 			for ($j = 0; $j < $i; $j++) {
 				$offset += $number_of_nations[$j];
 			}
-			$sql = 'SELECT T.team_name, T.team_chinese_name, T.team_nationality, C.country_continent FROM participants AS P LEFT JOIN teams AS T ON P.team_name=T.team_name LEFT JOIN countries AS C ON T.team_nationality=C.country_name WHERE tournament="'.$tournament.'" AND competition='.$competition.' AND type1="nation" AND type2="finals" ORDER BY points DESC LIMIT '.$offset.', '.$number_of_nations[$i];
+			$sql = 'SELECT T.team_name, T.team_chinese_name, T.team_nationality, C.country_continent FROM participants AS P LEFT JOIN teams AS T ON P.team_name=T.team_name LEFT JOIN countries AS C ON T.team_nationality=C.country_name WHERE tournament="'.$tournament.'" AND competition='.$competition.' AND type1="nation" AND type2="finals" ORDER BY points DESC, T.team_name LIMIT '.$offset.', '.$number_of_nations[$i];
 			$result = $conn->query($sql);
 			while ($row = $result->fetch_assoc()) {
 				array_push($teams[$i], array("team_name"=>$row["team_name"], "team_chinese_name"=>$row["team_chinese_name"], "nationality"=>$row["team_nationality"], "continent"=>$row["country_continent"], "availability"=>"unavailable"));
