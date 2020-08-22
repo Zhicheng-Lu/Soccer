@@ -61,7 +61,7 @@ function draw_games($conn, $tournament, $competition, $round, $win_type2, $win_s
                     </div>
     			</div>
             	<div class="row d-none d-md-block knockout_box_'.$match["game"].'" style="margin-bottom: 7px;">
-    				<div style="width: 320px;" onclick="simu_match(\''.$tournament.'\', '.$competition.', \''.$round.'\', '.($match["game"]-1).', \'\', 0, 0, \'\', \'\', 0, 0, -1)">
+    				<div style="width: 320px;" onclick="simu_match(\''.$tournament.'\', '.$competition.', \''.$round.'\', '.($match["game"]-1).', \''.$win_type2.'\', '.$win_start_index.', '.$win_index.', \''.$loss_tournament.'\', \''.$loss_type2.'\', '.$loss_start_index.', '.$loss_index.', -1)">
     					<div class="row">
         					<div class="col-57" style="text-align: right; padding-left: 0px;">
                                 <a style="text-decoration: none; color: black; cursor: pointer;" title="'.show_team_title($conn, $competition, $match["team2"]).'">
