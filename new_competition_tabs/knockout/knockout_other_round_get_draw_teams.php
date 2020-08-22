@@ -60,8 +60,16 @@ while ($row = $result->fetch_assoc()) {
 				if ($row["extra_score1"] > $row["extra_score2"]) {
 					array_push($proceed_teams, array("team_name"=>$row["team1"], "availability"=>"available"));
 				}
-				else {
+				elseif ($row["extra_score1"] < $row["extra_score2"]) {
 					array_push($proceed_teams, array("team_name"=>$row["team2"], "availability"=>"available"));
+				}
+				else {
+					if ($row["penalty_score1"] > $row["penalty_score2"]) {
+						array_push($proceed_teams, array("team_name"=>$row["team1"], "availability"=>"available"));
+					}
+					else {
+						array_push($proceed_teams, array("team_name"=>$row["team2"], "availability"=>"available"));
+					}
 				}
 			}
 		}
