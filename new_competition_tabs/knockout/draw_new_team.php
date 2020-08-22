@@ -38,9 +38,9 @@ else {
 		$conn->query($sql);
 	}
 	else {
-		$sql = 'INSERT INTO '.$tournament.'(competition, round, game, team1) VALUES('.$competition.', "'.$round.'", '.($max_game+1).', "'.$team_name.'")';
+		$sql = 'INSERT INTO '.$tournament.'(competition, group_index, round, game, team1) VALUES('.$competition.', "", "'.$round.'", '.($max_game+1).', "'.$team_name.'")';
 		$conn->query($sql);
-		$sql = 'INSERT INTO '.$tournament.'(competition, round, game, team2) VALUES('.$competition.', "'.$round.'", '.($max_game+2).', "'.$team_name.'")';
+		$sql = 'INSERT INTO '.$tournament.'(competition, group_index, round, game, team2) VALUES('.$competition.', "", "'.$round.'", '.($max_game+2).', "'.$team_name.'")';
 		$conn->query($sql);
 	}
 }
