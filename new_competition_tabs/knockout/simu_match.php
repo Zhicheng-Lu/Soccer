@@ -91,7 +91,7 @@ if ($round == "final") {
 			}
 		}
 
-		$sql = 'INSERT INTO '.$tournament.'(competition, round, game, team1) VALUES('.$competition.', "champion", 0, "'.$champion.'")';
+		$sql = 'INSERT INTO '.$tournament.'(competition, group_index, round, game, team1) VALUES('.$competition.', "", "champion", 0, "'.$champion.'")';
 		$conn->query($sql);
 	}
 	include("../final.php");
