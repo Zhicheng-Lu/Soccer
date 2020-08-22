@@ -20,9 +20,9 @@ while ($row = $result->fetch_assoc()) {
 }
 
 if ($max_game == -1) {
-	$sql = 'INSERT INTO '.$tournament.'(competition, round, game, team1) VALUES('.$competition.', "'.$round.'", 0, "'.$team_name.'")';
+	$sql = 'INSERT INTO '.$tournament.'(competition, group_index, round, game, team1) VALUES('.$competition.', "", "'.$round.'", 0, "'.$team_name.'")';
 	$conn->query($sql);
-	$sql = 'INSERT INTO '.$tournament.'(competition, round, game, team2) VALUES('.$competition.', "'.$round.'", 1, "'.$team_name.'")';
+	$sql = 'INSERT INTO '.$tournament.'(competition, group_index, round, game, team2) VALUES('.$competition.', "", "'.$round.'", 1, "'.$team_name.'")';
 	$conn->query($sql);
 }
 else {
