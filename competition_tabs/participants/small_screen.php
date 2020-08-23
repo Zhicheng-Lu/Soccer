@@ -63,7 +63,7 @@
 				<tr>
 					<td style="text-align: center;">混合冠军杯预选赛出局</td>';
 
-					$counter = national_participants_s($conn, $participants, $competition, "", "", 2, 0, $counter);
+					$counter = national_participants($conn, $participants, $competition, "", "", 2, 0, $counter);
 				}
 				$counter = print_nation_continent($conn, $tournament, $competition, $participants, "Europe", "欧洲", $counter);
 				$counter = print_nation_continent($conn, $tournament, $competition, $participants, "South America", "南美洲", $counter);

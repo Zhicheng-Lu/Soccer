@@ -44,7 +44,7 @@ else {
 			}
 			$teams = rank($teams, $matches);
 
-			$sql = 'INSERT INTO winners_cup(competition, round, game, team1) VALUES('.$competition.', "champion", 0, "'.$teams[0]["team_name"].'")';
+			$sql = 'INSERT INTO winners_cup(competition, group_index, round, game, team1) VALUES('.$competition.', "", "champion", 0, "'.$teams[0]["team_name"].'")';
 			$conn->query($sql);
 		}
 	}
