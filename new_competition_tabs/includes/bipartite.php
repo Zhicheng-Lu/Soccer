@@ -8,8 +8,6 @@ function bipartite($positions, $current_position, $teams, $tournament, $number_o
 			else {
 				$s = build_graph($positions, $current_position, $teams, $j, $tournament, $number_of_groups_with_two_nation_teams);
 				$max_flow = find_max_flow($s);
-				echo $teams[$j]["team_name"];
-				echo $max_flow;
 				// echo $max_flow;echo sizeof($s->get_children());
 				if ($max_flow != sizeof($s->get_children())) {
 					$teams[$j]["availability"] = "infeasible";
