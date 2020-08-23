@@ -10,16 +10,25 @@
 
 		<?php
 		include("../includes/bipartite.php");
-		$sql = 'SELECT COUNT(*) AS num_group_matches FROM '.$tournament.' WHERE competition='.$competition.' AND group_index<>"" AND score1 IS NOT NULL';
+		$sql = 'SELECT COUNT(*) AS num_group_matches FROM champions_league WHERE competition='.$competition.' AND group_index<>"" AND score1 IS NOT NULL';
 		$result = $conn->query($sql);
 		while ($row = $result->fetch_assoc()) {
-			$num_group_matches = $row["num_group_matches"];
+			$num_champions_league_group_matches = $row["num_group_matches"];
+		}
+		$sql = 'SELECT COUNT(*) AS num_group_matches FROM union_associations WHERE competition='.$competition.' AND group_index<>"" AND score1 IS NOT NULL';
+		$result = $conn->query($sql);
+		while ($row = $result->fetch_assoc()) {
+			$num_union_associations_group_matches = $row["num_group_matches"];
+		}
+		$sql = 'SELECT COUNT(*) AS num_group_matches FROM winners_cup WHERE competition='.$competition.' AND group_index<>"" AND score1 IS NOT NULL';
+		$result = $conn->query($sql);
+		while ($row = $result->fetch_assoc()) {
+			$num_winners_cup_group_matches = $row["num_group_matches"];
 		}
 		$group_finish = False;
-		echo $num_group_matches;
-		if ($tournament == "champions_league" && $num_group_matches == 252) $group_finish = True;
-		if ($tournament == "union_associations" && $num_group_matches == 324) $group_finish = True;
-		if ($tournament == "winners_cup" && $num_group_matches == 576) $group_finish = True;
+		if ($tournament == "champions_league" && $num_champions_league_group_matches == 252) $group_finish = True;
+		if ($tournament == "union_associations" && $num_union_associations_group_matches == 324 && $num_champions_league_group_matches == 252) $group_finish = True;
+		if ($tournament == "winners_cup" && $num_winners_cup_group_matches == 576 && $num_union_associations_group_matches == 324 && $num_champions_league_group_matches == 252) $group_finish = True;
 
 		$pots = array(array(), array());
 		if ($tournament == "champions_league") {
