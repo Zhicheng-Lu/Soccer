@@ -60,17 +60,21 @@ $auto_draw = $_POST["auto_draw"];
 			}
 		}
 		$number_of_groups_with_two_nation_teams = 0;
+		$number_of_groups_with_three_clubs_no_south_america = 0;
 		for ($i=0; $i < $number_of_groups; $i++) { 
 		 	$group = $groups[$i];
 			$group_name = $group["group_name"];
 			$sql = 'SELECT DISTINCT(TOU.team1), T.team_nationality, C.country_continent FROM '.$tournament.' AS TOU LEFT JOIN teams AS T ON TOU.team1=T.team_name LEFT JOIN countries AS C ON T.team_nationality=C.country_name WHERE TOU.competition='.$competition.' AND TOU.group_index="'.$group_name.'" AND TOU.team1 IS NOT NULL';
 			$result = $conn->query($sql);
 			$number_of_nation_teams = 0;
+			$three_clubs_no_south_america = True;
 			while ($row = $result->fetch_assoc()) {
 				if ($row["team1"] == $row["team_nationality"]) $number_of_nation_teams += 1;
+				if ($row["team1"] == $row["team_nationality"] || $row["country_continent"] == "South America") $three_clubs_no_south_america = False;
 				array_push($groups[$i]["teams"], array("team_name"=>$row["team1"], "nationality"=>$row["team_nationality"], "continent"=>$row["country_continent"]));
 			}
 			if ($number_of_nation_teams == 2) $number_of_groups_with_two_nation_teams = 1;
+			// if ($)
 		}
 
 		// determine current group
@@ -251,15 +255,15 @@ function check_valid($position_teams, $temp_team, $tournament, $number_of_groups
 		else $team_in_group_type = "club";
 		if ($temp_team["team_name"] == $temp_team["nationality"]) $temp_team_type = "nation";
 		else $temp_team_type = "club";
-		if (get_type($team_in_group) == get_type($temp_team) && get_type($temp_team) == "nation" && $tournament == "union_associations" && $number_of_groups_with_two_nation_teams == 1) {
-			return False;
-		}
+		// if (get_type($team_in_group) == get_type($temp_team) && get_type($temp_team) == "nation" && $tournament == "union_associations" && $number_of_groups_with_two_nation_teams == 1) {
+		// 	return False;
+		// }
 		if (get_type($team_in_group) == get_type($temp_team) && get_type($temp_team) == "nation" && $tournament == "winners_cup") {
 			return False;
 		}
 	}
 	if (sizeof($position_teams["teams"]) == 3) {
-		if ($tournament == "champions_league" || $tournament == "union_associations") {
+		if ($tournament == "champions_league") {
 			if (get_type($position_teams["teams"][0]) == "club" && get_type($position_teams["teams"][1]) == "club" && get_type($position_teams["teams"][2]) == "club" && get_type($temp_team) == "club") {
 				return False;
 			}

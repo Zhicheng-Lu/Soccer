@@ -16,6 +16,7 @@
 			$num_group_matches = $row["num_group_matches"];
 		}
 		$group_finish = False;
+		echo $num_group_matches;
 		if ($tournament == "champions_league" && $num_group_matches == 252) $group_finish = True;
 		if ($tournament == "union_associations" && $num_group_matches == 324) $group_finish = True;
 		if ($tournament == "winners_cup" && $num_group_matches == 576) $group_finish = True;
