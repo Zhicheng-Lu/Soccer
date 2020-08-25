@@ -292,7 +292,7 @@ function play_penalties($possibility1, $possibility2) {
 	$current = $start;
 	$counter = 0;
 	while (True) {
-		$counter += 1;
+		if ($current == $start) $counter += 1;
 		if ($current == 0) $another = 1;
 		else $another = 0;
 
