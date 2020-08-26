@@ -104,6 +104,7 @@ else $color = "black";
                         <nav class="site-navigation d-flex justify-content-end align-items-center">
                             <ul class="d-flex flex-column flex-lg-row justify-content-lg-end align-items-center">
                                 <li class="<?php if (!isset($_GET["tab"])) echo "current-menu-item";?>"><a href="index.php">首页</a></li>
+                                <li class="<?php if ($_GET["tab"]=="champions") echo "current-menu-item";?>"><a href="index.php?tab=champions">冠军</a></li>
                                 <li class="<?php if ($_GET["tab"]=="champions_league") echo "current-menu-item";?>"><a href="index.php?tab=champions_league">冠军杯</a></li>
                                 <li class="<?php if ($_GET["tab"]=="union_associations") echo "current-menu-item";?>"><a href="index.php?tab=union_associations">联盟杯</a></li>
                                 <li class="<?php if ($_GET["tab"]=="winners_cup") echo "current-menu-item";?>"><a href="index.php?tab=winners_cup">优胜者杯</a></li>
@@ -137,6 +138,7 @@ else $color = "black";
         }
     }
     else if ($_GET["tab"] == "rank") include("index_tabs/rank.php");
+    else if ($_GET["tab"] == "champions") include("index_tabs/champions.php");
     else include("index_tabs/competition.php");
     ?>
 
