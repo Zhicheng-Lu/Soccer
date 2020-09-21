@@ -105,11 +105,28 @@
                 if ($last_round == "12") $winners_cup_result = '12 强';
                 if ($last_round == "6") $winners_cup_result = '6 强';
                 if ($last_round == "finals") {
-                    $sql = 'SELECT * FROM winners_cup WHERE competition='.$competition.' AND round="champion"';
+                    // decide '冠军', '亚军', '季军'
+                    $matches = array();
+                    $sql = 'SELECT * FROM winners_cup WHERE competition='.$competition.' AND round="finals"';
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) {
-                        $winners_cup_result = (($row["team1"]==$team_modal_name)? '冠军': '亚军');
+                        array_push($matches, array("round"=>$row["round"], "game"=>$row["game"], "team1"=>$row["team1"], "score1"=>$row["score1"], "score2"=>$row["score2"], "team2"=>$row["team2"]));
                     }
+
+                    // get the unique team name in the group
+                    $teams = array();
+                    foreach ($matches as $match) {
+                        if (!isset($teams[$match["team1"]])) {
+                            $teams[$match["team1"]] = array();
+                        }
+                        if (!isset($teams[$match["team2"]])) {
+                            $teams[$match["team2"]] = array();
+                        }
+                    }
+                    $teams = rank($teams, $matches);
+                    if ($teams[0]["team_name"] == $team_modal_name) $winners_cup_result = '冠军';
+                    if ($teams[1]["team_name"] == $team_modal_name) $winners_cup_result = '亚军';
+                    if ($teams[2]["team_name"] == $team_modal_name) $winners_cup_result = '季军';
                 }
             }
         }
@@ -123,11 +140,28 @@
                 if ($last_round == "12") $winners_cup_result = '12 强';
                 if ($last_round == "6") $winners_cup_result = '6 强';
                 if ($last_round == "finals") {
-                    $sql = 'SELECT * FROM winners_cup WHERE competition='.$competition.' AND round="champion"';
+                    // decide '冠军', '亚军', '季军'
+                    $matches = array();
+                    $sql = 'SELECT * FROM winners_cup WHERE competition='.$competition.' AND round="finals"';
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) {
-                        $winners_cup_result = (($row["team1"]==$team_modal_name)? '冠军': '亚军');
+                        array_push($matches, array("round"=>$row["round"], "game"=>$row["game"], "team1"=>$row["team1"], "score1"=>$row["score1"], "score2"=>$row["score2"], "team2"=>$row["team2"]));
                     }
+
+                    // get the unique team name in the group
+                    $teams = array();
+                    foreach ($matches as $match) {
+                        if (!isset($teams[$match["team1"]])) {
+                            $teams[$match["team1"]] = array();
+                        }
+                        if (!isset($teams[$match["team2"]])) {
+                            $teams[$match["team2"]] = array();
+                        }
+                    }
+                    $teams = rank($teams, $matches);
+                    if ($teams[0]["team_name"] == $team_modal_name) $winners_cup_result = '冠军';
+                    if ($teams[1]["team_name"] == $team_modal_name) $winners_cup_result = '亚军';
+                    if ($teams[2]["team_name"] == $team_modal_name) $winners_cup_result = '季军';
                 }
             }
             else {
