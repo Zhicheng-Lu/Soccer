@@ -252,10 +252,10 @@
 
 	// nation champions leaguen
 	$nation_allocation["champions_league"] = array(
-		"Europe"=>array("finals"=>14, "qualifications"=>0),
+		"Europe"=>array("finals"=>13, "qualifications"=>0),
 		"South America"=>array("finals"=>4, "qualifications"=>1),
 		"North America"=>array("finals"=>3, "qualifications"=>1),
-		"Asia"=>array("finals"=>4, "qualifications"=>1),
+		"Asia"=>array("finals"=>5, "qualifications"=>1),
 		"Africa"=>array("finals"=>5, "qualifications"=>0),
 		"Oceania"=>array("finals"=>0, "qualifications"=>1));
 

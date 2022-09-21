@@ -163,15 +163,16 @@ function draw_games($conn, $tournament, $competition, $round, $win_type2, $win_s
 }
 
 function show_team_title($conn, $competition, $team_name) {
-	$sql = 'SELECT * FROM participants WHERE competition='.$competition.' AND team_name="'.$team_name.'"';
+	$sql = 'SELECT * FROM participants AS P LEFT JOIN teams T ON P.team_name=T.team_name LEFT JOIN countries AS C ON T.team_nationality=C.country_name WHERE P.competition='.$competition.' AND P.team_name="'.$team_name.'"';
 	$result = $conn->query($sql);
 	while ($row = $result->fetch_assoc()) {
+		$nationality = $row["country_chinese_name"];
 		$attack = $row["attack"];
 		$middlefield = $row["middlefield"];
 		$defence = $row["defence"];
 		$home_plus = $row["home_plus"];
 	}
-	return '进攻：'.$attack.'，中场：'.$middlefield.'，防守：'.$defence.'，主场：'.$home_plus;
+	return '国籍：'.$nationality.'，'.'进攻：'.$attack.'，中场：'.$middlefield.'，防守：'.$defence.'，主场：'.$home_plus;
 }
 
 function show_match_title($conn, $competition, $team1, $team2) {
